@@ -30,7 +30,7 @@ public class DiaryRecordParser {
         return validCommands.contains(cmd);
     }
 
-    public ResponseCode parseToRunningAccount(@In String record, @Out ScannerRecord scannerRecord) {
+    public ResponseCode parseToScannerRecord(@In String record, @Out ScannerRecord scannerRecord) {
         if (record == null || record.isEmpty()) { return ParserRetCode.PARSER_ERROR_RECORD_CANT_BE_EMPTY; }
         record = record.trim();
         String [] cols = record.split(" ");
