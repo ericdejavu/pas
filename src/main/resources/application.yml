@@ -13,7 +13,7 @@ spring:
     username: agent
     password: jBK@!xoGqsJjqgPG1
     #    password: root
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     dbcp2:
       min-idle: 5
       initial-size: 5
