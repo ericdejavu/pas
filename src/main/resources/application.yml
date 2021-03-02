@@ -1,0 +1,25 @@
+server:
+  port: 8761
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: pas
+  jackson:
+    date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
+    time-zone: GMT+8
+  datasource:
+    url: jdbc:mysql://localhost:3306/pas?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+    username: agent
+    password: jBK@!xoGqsJjqgPG1
+    #    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    dbcp2:
+      min-idle: 5
+      initial-size: 5
+      max-total: 20
+      max-wait-millis: 20000
+
+mybatis:
+  mapper-locations:
+  - classpath:mapper/*.mapper
