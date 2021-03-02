@@ -11,8 +11,9 @@ public class Stash {
     private String qrcode;
     private BigDecimal pay;
     private Integer amount;
+    private Integer consume;
+    private Boolean isSoldOut;
     private String optDate;
-    private Boolean isDeleted;
     private Date updateTime;
     private Date createTime;
 }

@@ -66,7 +66,7 @@ class ModelTests {
         Stash stash = new Stash();
         stash.setQrcode("001");
         stash.setAmount(10);
-        stash.setIsDeleted(false);
+        stash.setIsSoldOut(false);
         stash.setOptDate("2019-01-03");
         stash.setPay(new BigDecimal(50.00));
         stashMapper.save(stash);

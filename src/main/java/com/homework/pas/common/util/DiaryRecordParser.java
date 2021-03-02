@@ -5,6 +5,7 @@ import com.homework.pas.common.respnose.ResponseCode;
 import com.homework.pas.model.entity.ScannerRecord;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +65,31 @@ public class DiaryRecordParser {
         if (price == null || price.length() > MAX_PRICE_SIZE) { return false; }
         try {
             Double.parseDouble(price);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkDateFormat(String optDate) {
+        if (optDate == null || optDate.isEmpty()) { return false; }
+        optDate = optDate.trim();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            dateFormat.parse(optDate);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkQrcode(String qrcode) {
+        return qrcode != null && !qrcode.isEmpty();
+    }
+
+    public boolean checkAmount(String param1) {
+        try {
+            Integer.valueOf(param1);
         } catch (NumberFormatException e) {
             return false;
         }
