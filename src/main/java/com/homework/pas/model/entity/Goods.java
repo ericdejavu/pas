@@ -10,7 +10,6 @@ public class Goods {
     private Long id;
     private String qrcode;
     private String name;
-    private Integer amount;
     private BigDecimal price;
     private Date updateTime;
     private Date createTime;

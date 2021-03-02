@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.homework.pas.mapper.StashMapper">
+    <resultMap id="BaseResultMap" type="com.homework.pas.model.entity.Stash">
+        <id column="id" property="id"/>
+        <result column="qrcode" property="qrcode"/>
+        <result column="pay" property="pay"/>
+        <result column="amount" property="amount"/>
+        <result column="optDate" property="optDate"/>
+        <result column="isDeleted" property="isDeleted"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    <insert id="save">
+        insert into stash
+        (qrcode, pay, amount, opt_date, is_deleted)
+        values
+        (#{stash.qrcode}, #{stash.pay}, #{stash.amount}, #{stash.optDate}, #{stash.isDeleted})
+    </insert>
+
+    <select id="selectByQrcodeAndOrderByOptDate" resultMap="BaseResultMap">
+        select * from stash where is_deleted=0 and qrcode like #{qrcode} order by opt_date desc;
+    </select>
+</mapper>

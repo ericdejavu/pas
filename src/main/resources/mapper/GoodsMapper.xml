@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.homework.pas.mapper.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.homework.pas.model.entity.Goods">
+        <id column="id" property="id"/>
+        <result column="qrcode" property="qrcode"/>
+        <result column="name" property="name"/>
+        <result column="price" property="price"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+    <insert id="save">
+        insert into goods
+        (qrcode, name, price)
+        values
+        (#{goods.qrcode}, #{goods.name}, #{goods.price})
+    </insert>
+
+    <select id="getIfExist" resultMap="BaseResultMap">
+        select * from goods where qrcode like #{qrcode};
+    </select>
+</mapper>

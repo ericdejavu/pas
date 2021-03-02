@@ -8,6 +8,7 @@ import java.util.Date;
 @Data
 public class Stash {
     private Long id;
+    private String qrcode;
     private BigDecimal pay;
     private Integer amount;
     private String optDate;
