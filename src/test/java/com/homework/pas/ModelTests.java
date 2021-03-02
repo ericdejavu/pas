@@ -71,7 +71,10 @@ class ModelTests {
         stash.setPay(new BigDecimal(50.00));
         stashMapper.save(stash);
 
-        List<Stash> stashes = stashMapper.selectByQrcodeAndOrderByOptDate("001");
+        List<Stash> stashes = stashMapper.selectByQrcodeAndOrderByOptDate("001", false);
+        log.info("stashes: {}", stashes);
+        stashes.clear();
+        stashes = stashMapper.selectByQrcodeAndOrderByOptDate("001", true);
         log.info("stashes: {}", stashes);
     }
 

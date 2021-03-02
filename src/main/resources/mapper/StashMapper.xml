@@ -20,6 +20,8 @@
     </insert>
 
     <select id="selectByQrcodeAndOrderByOptDate" resultMap="BaseResultMap">
-        select * from stash where is_sold_out=0 and qrcode like #{qrcode} order by opt_date desc;
+        select * from stash where is_sold_out=#{containsSoldOut} and qrcode like #{qrcode} order by opt_date desc;
     </select>
+
+
 </mapper>

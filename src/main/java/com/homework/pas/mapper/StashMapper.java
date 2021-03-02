@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 public interface StashMapper {
     void save(@Param("stash") Stash stash);
-    List<Stash> selectByQrcodeAndOrderByOptDate(@Param("qrcode") String qrcode);
+    List<Stash> selectByQrcodeAndOrderByOptDate(@Param("qrcode") String qrcode, @Param("containsSoldOut") Boolean containsSoldOut);
 }

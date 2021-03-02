@@ -19,4 +19,8 @@
     <select id="getIfExist" resultMap="BaseResultMap">
         select * from goods where qrcode like #{qrcode};
     </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from goods;
+    </select>
 </mapper>
