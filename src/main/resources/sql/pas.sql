@@ -14,7 +14,7 @@ create table scanner_record (
 create table stash (
   id int primary key auto_increment,
   qrcode varchar(32) NOT NULL,
-  pay decimal NOT NULL,
+  pay decimal(5,2) NOT NULL,
   amount int default 0,
   consume int default 0,
   opt_date varchar (12) NOT NULL,
@@ -27,7 +27,7 @@ create table goods (
   id int primary key auto_increment,
   qrcode varchar (32) UNIQUE NOT NULL,
   name varchar (128) NOT NULL,
-  price decimal (32),
+  price decimal (5,2),
   update_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   create_time datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) charset=utf8;

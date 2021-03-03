@@ -25,4 +25,8 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select * from scanner_record;
     </select>
+
+    <delete id="deleteAllRecord">
+        delete from scanner_record
+    </delete>
 </mapper>

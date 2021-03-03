@@ -16,7 +16,7 @@ import java.util.List;
 
 @Slf4j
 @SpringBootTest
-class ModelTests {
+class ModelTest {
 
     @Resource
     private GoodsMapper goodsMapper;
@@ -68,8 +68,8 @@ class ModelTests {
         stash.setAmount(10);
         stash.setIsSoldOut(false);
         stash.setOptDate("2019-01-03");
-        stash.setPay(new BigDecimal(50.00));
-        stashMapper.save(stash);
+        stash.setPay(new BigDecimal(50.50));
+        stashMapper.insert(stash);
 
         List<Stash> stashes = stashMapper.selectByQrcodeAndOrderByOptDate("001", false);
         log.info("stashes: {}", stashes);

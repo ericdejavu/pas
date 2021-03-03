@@ -11,4 +11,5 @@ public interface GoodsMapper {
     Goods getIfExist(@Param("qrcode") String qrcode);
     void save(@Param("goods") Goods goods);
     List<Goods> selectAll();
+    void deleteAllGoods();
 }

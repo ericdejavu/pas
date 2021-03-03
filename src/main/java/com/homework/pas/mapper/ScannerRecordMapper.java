@@ -10,4 +10,5 @@ import java.util.List;
 public interface ScannerRecordMapper {
     void insert(@Param("scannerRecord") ScannerRecord scannerRecord);
     List<ScannerRecord> selectAll();
+    void deleteAllRecord();
 }

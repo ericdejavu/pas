@@ -23,4 +23,7 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select * from goods;
     </select>
+    <delete id="deleteAllGoods">
+        delete from goods
+    </delete>
 </mapper>

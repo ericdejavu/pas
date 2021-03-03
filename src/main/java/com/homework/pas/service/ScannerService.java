@@ -51,7 +51,7 @@ public class ScannerService {
             return ParserRetCode.PARSER_ERROR_PRICE_FORMAT_INCORRECT;
         }
 
-        if (!diaryRecordParser.checkName(scannerRecord.getParam2())) {
+        if (!diaryRecordParser.checkName(scannerRecord.getParam1())) {
             return ParserRetCode.PARSER_ERROR_NAME_FORMAT_INCORRECT;
         }
 
@@ -92,10 +92,11 @@ public class ScannerService {
         Stash stash = new Stash();
         stash.setQrcode(scannerRecord.getQrcode());
         stash.setAmount(Integer.valueOf(scannerRecord.getParam1()));
+        stash.setConsume(0);
         stash.setOptDate(scannerRecord.getOptDate());
         stash.setIsSoldOut(false);
         stash.setPay(new BigDecimal(scannerRecord.getParam2()));
-        stashMapper.save(stash);
+        stashMapper.insert(stash);
         return ParserRetCode.PARSER_OPT_OK;
     }
 
@@ -115,14 +116,18 @@ public class ScannerService {
 
         Integer soldNumber = Integer.valueOf(scannerRecord.getParam1());
         for (Stash stash : stashes) {
-            soldNumber = soldNumber - stash.getAmount() - stash.getConsume();
-            if (soldNumber >= 0) {
+            int tmpNumber = soldNumber - stash.getAmount() + stash.getConsume();
+            if (tmpNumber >= 0) {
                 stash.setConsume(stash.getAmount());
                 stash.setIsSoldOut(true);
             } else {
-                stash.setConsume(soldNumber);
+                stash.setConsume(stash.getConsume() + soldNumber);
             }
-            stashMapper.save(stash);
+            soldNumber = tmpNumber;
+            stashMapper.update(stash);
+            if (soldNumber < 0) {
+                break;
+            }
         }
 
         return ParserRetCode.PARSER_OPT_OK;
@@ -183,6 +188,7 @@ public class ScannerService {
                     inventoryAmount = inventoryAmount.add(new BigDecimal(stash.getAmount() - stash.getConsume()).multiply(stash.getPay()));
                 }
             }
+            profit = salesAmount.subtract(inventoryAmount);
             report.setInventoryQuantity(String.valueOf(inventoryQuantity));
             report.setInventoryAmount(decimalFormat.format(inventoryAmount));
             report.setSalesQuantity(String.valueOf(salesQuantity));
@@ -197,5 +203,15 @@ public class ScannerService {
     public BaseResponseBody getValidRecordLogs() {
         // data : List<ScannerRecord>
         return null;
+    }
+
+    /**
+     * test only
+      */
+    @Deprecated
+    public void deleteAll() {
+        goodsMapper.deleteAllGoods();
+        scannerRecordMapper.deleteAllRecord();
+        stashMapper.deleteAllStash();
     }
 }

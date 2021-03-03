@@ -58,7 +58,7 @@ public class DiaryRecordParser {
     }
 
     public boolean checkName(String name) {
-        return name == null || name.length() > MAX_NAME_SIZE;
+        return name != null && name.length() < MAX_NAME_SIZE;
     }
 
     public boolean checkPriceFormat(String price) {

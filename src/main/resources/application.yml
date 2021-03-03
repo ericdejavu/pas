@@ -9,7 +9,10 @@ spring:
     date-format: com.fasterxml.jackson.databind.util.ISO8601DateFormat
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://10.0.0.5:3306/pas?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+#    url: jdbc:mysql://10.0.0.5:3306/pas?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+#    username: agent
+#    password: jBK@!xoGqsJjqgPG1
+    url: jdbc:mysql://localhost:3306/pas?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
     username: agent
     password: jBK@!xoGqsJjqgPG1
     #    password: root
