@@ -100,6 +100,14 @@ public class ScannerService {
         return ParserRetCode.PARSER_OPT_OK;
     }
 
+    private boolean checkStashIsEnough(List<Stash> stashes, Integer saleAmount) {
+        Integer totalStash = 0;
+        for (Stash stash: stashes) {
+            totalStash += (stash.getAmount() - stash.getConsume());
+        }
+        return totalStash >= saleAmount;
+    }
+
     private ResponseCode sale(ScannerRecord scannerRecord) {
         if (scannerRecord == null) {
             return ParserRetCode.PARSER_ERROR_PARAMS;
@@ -107,7 +115,18 @@ public class ScannerService {
 
         List<Stash> stashes = stashMapper.selectByQrcodeAndOrderByOptDate(scannerRecord.getQrcode(), false);
         if (stashes.isEmpty()) {
-            return ParserRetCode.PARSER_ERROR_NO_QRCODE_FOUND;
+            List<Stash> tmpStashes = stashMapper.selectByQrcodeAndOrderByOptDate(scannerRecord.getQrcode(), true);
+            if (tmpStashes.isEmpty()) {
+                return ParserRetCode.PARSER_ERROR_NO_QRCODE_FOUND;
+            } else {
+                // sale数量为0 时跳过检测
+                if (!diaryRecordParser.checkAmount(scannerRecord.getParam1())) {
+                    return ParserRetCode.PARSER_ERROR_AMOUNT_FORMAT_INCORRECT;
+                }
+                if (!new Integer(0).equals(Integer.valueOf(scannerRecord.getParam1()))) {
+                    return ParserRetCode.PARSER_ERROR_NO_STASH_FOR_SALE;
+                }
+            }
         }
 
         if (!diaryRecordParser.checkAmount(scannerRecord.getParam1())) {
@@ -115,6 +134,11 @@ public class ScannerService {
         }
 
         Integer soldNumber = Integer.valueOf(scannerRecord.getParam1());
+
+        if (!checkStashIsEnough(stashes, soldNumber)) {
+            return ParserRetCode.PARSER_ERROR_NO_STASH_FOR_SALE;
+        }
+
         for (Stash stash : stashes) {
             int tmpNumber = soldNumber - stash.getAmount() + stash.getConsume();
             if (tmpNumber >= 0) {

@@ -39,11 +39,11 @@ public class DiaryRecordParser {
 
         // check date
         if (!dateFormatCheck(cols[0])) {
-            return ParserRetCode.PARSER_ERROR_RECORD_CANT_BE_EMPTY;
+            return ParserRetCode.PARSER_ERROR_DATE_FORMAT_INCORRECT;
         }
 
         if (!commandCheck(cols[1])) {
-            return ParserRetCode.PARSER_ERROR_RECORD_CANT_BE_EMPTY;
+            return ParserRetCode.PARSER_ERROR_INVALID_COMMAND;
         }
 
         scannerRecord.setOptDate(cols[0]);

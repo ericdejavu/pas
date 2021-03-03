@@ -37,4 +37,26 @@ public class ScannerServiceTest {
         log.info("{}", scannerService.getGoodsReport());
     }
 
+    String[] errorStrs = new String[] {
+            "2019-01-01 NEW ",
+            "2019-01-01 NEW 002 Orange",
+            "2019-01-01 AAB 001 50 3.00",
+            "2019-01-01 PURCHASE 002 20",
+            "2019-01 SALES 001 22",
+            "2019--01 SALES 002 3",
+            "-01-02 SALES 001 25",
+            "2019-01-02 SALES 002",
+            "2019-01-03 001 20 3.50",
+            "2019-01-03 SALES 22"
+    };
+
+    @Test
+    void errorStrsTest() {
+        scannerService.deleteAll();
+        for (String str :errorStrs) {
+            log.info("{}", scannerService.parseRecord(str));
+        }
+        log.info("{}", scannerService.getGoodsReport());
+    }
+
 }
