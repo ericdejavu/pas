@@ -7,12 +7,12 @@ public enum  ParserRetCode implements ResponseCode {
     PARSER_ERROR_RECORD_FORMAT_INCORRECT(-2, " cause by incorrect record format"),
     PARSER_ERROR_DATE_FORMAT_INCORRECT(-3, " cause by incorrect date format"),
     PARSER_ERROR_INVALID_COMMAND(-4, " cause by invalid command"),
-    PARSER_ERROR_DUPLICATE_QRCODE(-5, " cause by invalid command"),
-    PARSER_ERROR_PRICE_FORMAT_INCORRECT(-6, " cause by invalid command"),
-    PARSER_ERROR_NAME_FORMAT_INCORRECT(-6, " name is too long"),
-    PARSER_ERROR_NO_QRCODE_FOUND(-7, " Did not found merchandise with barcode euqals"),
-    PARSER_ERROR_QRCODE_EMPTY(-8, " cause by qrcode empty"),
-    PARSER_ERROR_AMOUNT_FORMAT_INCORRECT(-9, " case by amount format incorrect");
+    PARSER_ERROR_DUPLICATE_QRCODE(-5, " cause by duplicate qrcode"),
+    PARSER_ERROR_PRICE_FORMAT_INCORRECT(-6, " cause price format incorrect"),
+    PARSER_ERROR_NAME_FORMAT_INCORRECT(-7, " name is too long"),
+    PARSER_ERROR_NO_QRCODE_FOUND(-8, " Did not found merchandise with barcode euqals"),
+    PARSER_ERROR_QRCODE_EMPTY(-9, " cause by qrcode empty"),
+    PARSER_ERROR_AMOUNT_FORMAT_INCORRECT(-10, " case by amount format incorrect");
 
     private int code;
     private String msg;

@@ -135,7 +135,8 @@ public class ScannerService {
     }
 
     @Transactional
-    public synchronized ResponseCode parseRecord(String record) {
+    public synchronized BaseResponseBody parseRecord(String record) {
+        if (record == null || record.isEmpty()) { return new BaseResponseBody(ParserRetCode.PARSER_ERROR_PARAMS); }
         ScannerRecord scannerRecord = new ScannerRecord();
         ResponseCode responseCode = diaryRecordParser.parseToScannerRecord(record, scannerRecord);
         if (responseCode.equals(ParserRetCode.PARSER_OPT_OK)) {
@@ -153,10 +154,14 @@ public class ScannerService {
                     break;
             }
         }
+        BaseResponseBody responseBody = new BaseResponseBody(responseCode);
         if (responseCode.equals(ParserRetCode.PARSER_OPT_OK)) {
             scannerRecordMapper.insert(scannerRecord);
+            responseBody.setMessage(responseBody.getMessage() + " [" + record + "]");
+        } else {
+            responseBody.setMessage("Failed to parse: [" + record + "] " + responseBody.getMessage());
         }
-        return responseCode;
+        return responseBody;
     }
 
 
