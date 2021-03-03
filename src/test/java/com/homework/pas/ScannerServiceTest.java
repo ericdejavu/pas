@@ -31,10 +31,11 @@ public class ScannerServiceTest {
     @Test
     void contextLoads() {
         scannerService.deleteAll();
-        for (String str :strs) {
-            log.info("{}", scannerService.parseRecord(str));
-        }
-        log.info("{}", scannerService.getGoodsReport());
+        scannerService.parseRecord("2019-01-03 SALES 001 22");
+//        for (String str :strs) {
+//            log.info("{}", scannerService.parseRecord(str));
+//        }
+//        log.info("{}", scannerService.getGoodsReport());
     }
 
     String[] errorStrs = new String[] {

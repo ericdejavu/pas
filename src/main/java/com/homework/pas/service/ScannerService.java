@@ -216,8 +216,9 @@ public class ScannerService {
                     inventoryQuantity += stash.getAmount() - stash.getConsume();
                     inventoryAmount = inventoryAmount.add(new BigDecimal(stash.getAmount() - stash.getConsume()).multiply(stash.getPay()));
                 }
+                profit = profit.add(stash.getPay().multiply(new BigDecimal(stash.getConsume())));
             }
-            profit = salesAmount.subtract(inventoryAmount);
+            profit = salesAmount.subtract(profit);
             report.setInventoryQuantity(String.valueOf(inventoryQuantity));
             report.setInventoryAmount(decimalFormat.format(inventoryAmount));
             report.setSalesQuantity(String.valueOf(salesQuantity));
